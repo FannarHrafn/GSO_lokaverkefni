@@ -1,0 +1,53 @@
+CREATE DATABASE 1907002160_Gso_Lokaverkefni;
+USE 1907002160_Gso_Lokaverkefni;
+
+CREATE TABLE Tegund
+(
+ID INT PRIMARY KEY NOT NULL,
+nafn VARCHAR(20)
+
+);
+
+CREATE TABLE Flokkur (
+ID INT PRIMARY KEY NOT NULL,
+nafn VARCHAR(20)
+);
+
+CREATE TABLE Utgefandi (
+ID INT PRIMARY KEY NOT NULL,
+nafn VARCHAR(35),
+ar_stofnad INT
+);
+
+CREATE TABLE Flytjandi
+(
+ID INT PRIMARY KEY NOT NULL,
+nafn VARCHAR(45),
+hljomsveit VARCHAR(40),
+flokkur VARCHAR(45),
+faedingardagur DATE,
+danardagur DATE,
+thjoderni VARCHAR(45),
+flokkur_id INT
+);
+
+CREATE TABLE Diskur
+(
+ID INT PRIMARY KEY NOT NULL,
+nafn VARCHAR(45),
+log INT,
+VERD INT,
+verdlaun VARCHAR(100),
+utgafudagur DATE,
+utgefandi_id FOREIGN KEY,
+);
+
+
+CREATE TABLE Hofundur
+(
+ID INT PRIMARY KEY NOT NULL,
+nafn VARCHAR(50),
+faedingardagur DATE,
+danardagur DATE,
+thjoderni VARCHAR(50)
+);
