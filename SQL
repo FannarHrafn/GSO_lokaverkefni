@@ -1,53 +1,81 @@
-CREATE DATABASE 1907002160_Gso_Lokaverkefni;
-USE 1907002160_Gso_Lokaverkefni;
-
-CREATE TABLE Tegund
-(
-ID INT PRIMARY KEY NOT NULL,
-nafn VARCHAR(20)
-
+create database 2601994049_lokaverkefni;
+use 2601994049_lokaverkefni;
+CREATE TABLE tegund (
+    ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nafn VARCHAR(30)
 );
 
-CREATE TABLE Flokkur (
-ID INT PRIMARY KEY NOT NULL,
-nafn VARCHAR(20)
+CREATE TABLE hofundur (
+    ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nafn VARCHAR(50),
+    faedingardagur DATE,
+    danardagur DATE,
+    thjoderni VARCHAR(50)
 );
 
-CREATE TABLE Utgefandi (
-ID INT PRIMARY KEY NOT NULL,
-nafn VARCHAR(35),
-ar_stofnad INT
+CREATE TABLE flokkur (
+    ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nafn VARCHAR(50)
 );
 
-CREATE TABLE Flytjandi
-(
-ID INT PRIMARY KEY NOT NULL,
-nafn VARCHAR(45),
-hljomsveit VARCHAR(40),
-flokkur VARCHAR(45),
-faedingardagur DATE,
-danardagur DATE,
-thjoderni VARCHAR(45),
-flokkur_id INT
+CREATE TABLE flytjandi (
+    ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nafn VARCHAR(60),
+    hljomsveit VARCHAR(60),
+    flokkur INT,
+    faedingardagur DATE,
+    danardagur DATE,
+    thjoderni VARCHAR(50),
+    FOREIGN KEY (flokkur)
+        REFERENCES flokkur (ID)
 );
 
-CREATE TABLE Diskur
-(
-ID INT PRIMARY KEY NOT NULL,
-nafn VARCHAR(45),
-log INT,
-VERD INT,
-verdlaun VARCHAR(100),
-utgafudagur DATE,
-utgefandi_id FOREIGN KEY,
+CREATE TABLE utgefandi (
+    ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nafn VARCHAR(50),
+    ar_stofnad INT
 );
 
-
-CREATE TABLE Hofundur
-(
-ID INT PRIMARY KEY NOT NULL,
-nafn VARCHAR(50),
-faedingardagur DATE,
-danardagur DATE,
-thjoderni VARCHAR(50)
+CREATE TABLE diskur (
+    ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nafn VARCHAR(60),
+    verd INT,
+    verdlaun VARCHAR(300),
+    utgafudagur DATE,
+    utgefandi INT,
+    FOREIGN KEY (utgefandi)
+        REFERENCES utgefandi (ID)
 );
+
+CREATE TABLE lag (
+    ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nafn VARCHAR(60),
+    flytjandi INT,
+    hofundur INT,
+    tegund INT,
+    diskur INT,
+    lengd DECIMAL(4 , 2 ),
+    texti VARCHAR(2000),
+    utgafudagur DATE,
+    FOREIGN KEY (flytjandi)
+        REFERENCES flytjandi (ID),
+    FOREIGN KEY (hofundur)
+        REFERENCES hofundur (ID),
+    FOREIGN KEY (tegund)
+        REFERENCES tegund (ID),
+    FOREIGN KEY (diskur)
+        REFERENCES diskur (ID)
+);
+drop table diskur;
+insert into utgefandi(nafn,ar_stofnad)
+values
+('BGM',2008),
+('Sony',1946),
+('UMPG',1972);
+
+insert into diskur(nafn,verd,verdlaun,utgafudagur,utgefandi)
+values
+('A Head Full of Dreams',4999,'Number 1 UK Album','2015-12-05',1),
+('Thriller',3999,'1.27 million copies sold','1982-11-30',2),
+('Purple Rain',2999,'USA most sold album','1984-06-25',3)
+('Discovery',4999,'The best in electronic music','2001-02-26',2);
