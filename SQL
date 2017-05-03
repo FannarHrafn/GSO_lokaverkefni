@@ -8,8 +8,8 @@ CREATE TABLE tegund (
 CREATE TABLE hofundur (
     ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nafn VARCHAR(50),
-    faedingardagur DATE,
-    danardagur DATE,
+    faedingarar int,
+    danarar int,
     thjoderni VARCHAR(50)
 );
 
@@ -20,11 +20,11 @@ CREATE TABLE flokkur (
 
 CREATE TABLE flytjandi (
     ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nafn VARCHAR(60),
+    nafn VARCHAR(120),
     hljomsveit VARCHAR(60),
     flokkur INT,
-    faedingardagur DATE,
-    danardagur DATE,
+    faedingarar int,
+    danarar int,
     thjoderni VARCHAR(50),
     FOREIGN KEY (flokkur)
         REFERENCES flokkur (ID)
@@ -77,5 +77,91 @@ insert into diskur(nafn,verd,verdlaun,utgafudagur,utgefandi)
 values
 ('A Head Full of Dreams',4999,'Number 1 UK Album','2015-12-05',1),
 ('Thriller',3999,'1.27 million copies sold','1982-11-30',2),
-('Purple Rain',2999,'USA most sold album','1984-06-25',3)
+('Purple Rain',2999,'USA most sold album','1984-06-25',3),
 ('Discovery',4999,'The best in electronic music','2001-02-26',2);
+
+insert into hofundur(nafn,faedingarar,danarar,thjoderni)
+values
+('Rik Simpson',1989,NULL,'Bretland'),
+('Daft Punk',1974,NULL,'Frakkland');
+
+insert into lag(nafn,flytjandi,hofundur,tegund,diskur,lengd,texti,utgafudagur)
+values
+('A Head Full Of Dreams',3.43,
+'A head full of dreams
+A head full of dreams
+Into life I’ve just been woken
+With a head full, a head full of dreams',
+'2016-08-19'
+),
+
+('Birds',3.49,'come on rage with me
+we don’t need words
+and we’ll be birds
+got to make our own key',
+'2016-01-02'
+),
+
+('A Hymn For The Weekend',4.18,'I oh I oh I
+got me feeling drunk and high
+so high so high
+oh I oh I oh I
+now I’m feeling drunk and high
+so high so high','2016-01-25'),
+
+('Everglow',5.01,'so if you love someone, you should let them know
+oh the light that you left me will everglow','2014-11-11'),
+
+('Adventure Of A Lifetime',4.24,'now I feel my heart beating
+I feel my heart underneath my skin
+and I feel my heart beating
+oh you make me feel
+like I’m alive again
+alive again
+oh you make me feel
+like I’m alive again','2015-11-06'),
+
+('Fun',4.27,'but come on don’t give up don’t say we give in
+Don’t say it’s over
+Don’t say we’re done
+Ah didn’t we have fun?','2015-12-04'),
+
+('Up & Up',6.45,'fixing up a car to drive in it again
+searching for the water hoping for the rain
+up and up, up and up','2016-04-22'),
+
+('One More Time',5.20,'One more time
+Music''s got me feeling so free
+We''re gonna celebrate
+Celebrate and dance so free
+One more time','2009-11-30')
+
+('Aerodynamic',3.27,'','2001-03-28');
+insert into flytjandi(nafn,hljomsveit,flokkur,faedingarar,danarar,thjoderni)
+values
+('Chris Martin','Coldplay',2,1977,NULL,'Bretland'),
+('Guillaume Emmanuel "Guy-Manuel" de Homem-Christo , Thomas Bangalter','Daft Punk',4,1974,NULL,'Frakkland');
+
+insert into flokkur(nafn)
+values
+('sóló'),
+('Hljómsveit'),
+('Dúó'),
+('Electronic');
+insert into tegund(nafn)
+values
+('pop'),
+('Soul'),
+('R&B'),
+('Funk'),
+('Funk Rokk'),
+('Soft Rokk'),
+('Dance Rokk'),
+('Rokk'),
+('New Wave'),
+('Psychedelia'),
+('Hard Rock'),
+('Post-Rock'),
+('Disko'),
+('Garage'),
+('French House');
