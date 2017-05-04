@@ -72,14 +72,18 @@ values
 ('Parlophone',1896),
 ('Epic',1953),
 ('Warner Bros. Records',1958),
-('virgin',1972);
+('virgin',1972),
+('Columbia',1887);
 
 insert into diskur(nafn,verd,verdlaun,utgafudagur,utgefandi)
 values
 ('A Head Full of Dreams',4999,'Number 1 UK Album','2015-12-05',1),
 ('Thriller',3999,'1.27 million copies sold','1982-11-30',2),
 ('Purple Rain',2999,'USA most sold album','1984-06-25',3),
-('Discovery',4999,'The best in electronic music','2001-02-26',4);
+('Discovery',4999,'The best in electronic music','2001-02-26',4),
+('Random Access Memories',4999,'Nr.1 US Dance Album','2013-05-17',5),
+('Homework',2999,'The Roots of Daft Punk','1997-01-20',4),
+('Human After All',3999,'Nr.1 US Electronic Album','2005-03-14',4);
 
 insert into lag(nafn,flytjandi,hofundur,tegund,diskur,lengd,texti,utgafudagur)
 values
@@ -250,7 +254,47 @@ I love you more than anyone in my life','2003-11-14'),
 ('Face to Face',2,2,16,4,3.58,'There''s not much I know about you
 Fear will always make you blind
 But the answer is in clear view
-It''s amazing what you''ll find face to face','2003-10-10');
+It''s amazing what you''ll find face to face','2003-10-10'),
+
+('Give Life Back To Music',2,2,13,5,4.34,'Let the music in tonight
+Just turn on the music
+Let the music of your life
+Give life back to music','2014-01-31'),
+
+('The Game Of Love',2,2,13,5.21,'There is a game of love
+There is a game of love
+This is the game of love
+This is the game of love','2013-05-17'),
+
+('Contact',2,2,16,5,6.21,' It is a bright object and it''s obviously rotating because it''s flashing,
+ it''s way out in the distance','2013-05-17'),
+ 
+('Revolution 909',2,2,16,6,5.24,'Instrumental','1998-02-16'),
+
+('Da Funk',2,2,16,6,5.29,'Instrumental','1996-12-01'),
+
+('Around The World',2,2,15,6,7.09,'Around the world, around the world
+Around the world, around the world
+Around the world, around the world','1997-03-17'),
+
+('Burnin',2,2,16,6,6.53,'Instrumental','1997-09-15'),
+
+('Human After All',2,2,16,7,5.19,'We are human... after all
+Much in common. After all','2005-10-21'),
+
+('The Prime Time Of Your Life',2,2,16,7,4.23,'Now
+Live it
+The prime time of your life','2006-06-17'),
+
+('Robot Rock',2,2,18,7,4.47,'Rock. Robot Rock
+Rock. Robot Rock
+Rock. Robot Rock
+Rock. Robot Rock','2005-04-11'),
+
+('Technologic',2,2,16,7,4.44,'Buy it, use it, break it, fix it
+Trash it, change it, mail - upgrade it
+Charge it, point it, zoom it, press it','2005-06-14')
+;
 insert into flytjandi(nafn,hljomsveit,flokkur,faedingarar,danarar,thjoderni)
 values
 ('Chris Martin','Coldplay',2,1977,NULL,'England'),
@@ -292,4 +336,5 @@ values
 ('Garage'),
 ('French House'),
 ('House'),
-('Synthpop');
+('Synthpop'),
+('Electronic Rokk');
