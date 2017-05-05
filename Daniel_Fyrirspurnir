@@ -1,0 +1,61 @@
+
+#A
+SELECT diskur.nafn as diskur, lag.nafn as lag
+FROM lag
+inner join diskur on lag.diskur=diskur.id
+WHERE diskur.nafn like 'purple rain';
+
+#B
+SELECT flytjandi.nafn as flytjandi, lag.nafn as lag
+FROM lag
+inner join flytjandi on lag.flytjandi=flytjandi.id
+WHERE flytjandi.nafn like 'Michael Jackson';
+
+#C
+SELECT tegund.nafn as tegund, lag.nafn as lag
+FROM lag
+inner join tegund on lag.tegund=tegund.id
+WHERE tegund.nafn like 'Pop';
+
+#D
+SELECT lag.nafn,lag.lengd
+FROM lag
+WHERE lag.lengd > 5;
+
+#E
+SELECT diskur.nafn,diskur.utgafudagur
+FROM diskur
+WHERE diskur.utgafudagur > '2010-01-01';
+
+#F
+SELECT lag.nafn as lag, flytjandi.nafn, lag.utgafudagur, lag.hofundur
+FROM lag
+inner join flytjandi on lag.flytjandi=flytjandi.id
+ORDER BY lag.hofundur DESC;
+
+#G
+SELECT lag.lengd, flytjandi.nafn, diskur.nafn
+FROM lag
+inner join flytjandi on lag.flytjandi=flytjandi.id
+inner join diskur on lag.diskur=diskur.id
+ORDER BY lag.lengd DESC
+LIMIT 5;
+
+
+
+#P
+SELECT utgefandi.nafn,diskur.nafn
+FROM utgefandi
+inner join diskur on diskur.utgefandi=utgefandi.id
+WHERE utgefandi.nafn like 'virgin';
+
+#R
+SELECT flytjandi.nafn, flokkur.nafn
+FROM flytjandi
+inner join flokkur on flytjandi.flokkur=flokkur.id;
+
+#S
+SELECT lag.nafn,hofundur.thjoderni
+FROM lag
+inner join hofundur on lag.hofundur=hofundur.id
+WHERE hofundur.thjoderni = 'England' OR hofundur.thjoderni = 'Skotland';
