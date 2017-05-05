@@ -72,18 +72,14 @@ values
 ('Parlophone',1896),
 ('Epic',1953),
 ('Warner Bros. Records',1958),
-('virgin',1972),
-('Columbia',1887);
+('virgin',1972);
 
 insert into diskur(nafn,verd,verdlaun,utgafudagur,utgefandi)
 values
 ('A Head Full of Dreams',4999,'Number 1 UK Album','2015-12-05',1),
 ('Thriller',3999,'1.27 million copies sold','1982-11-30',2),
 ('Purple Rain',2999,'USA most sold album','1984-06-25',3),
-('Discovery',4999,'The best in electronic music','2001-02-26',4),
-('Random Access Memories',4999,'Nr.1 US Dance Album','2013-05-17',5),
-('Homework',2999,'The Roots of Daft Punk','1997-01-20',4),
-('Human After All',3999,'Nr.1 US Electronic Album','2005-03-14',4);
+('Discovery',4999,'The best in electronic music','2001-02-26',4);
 
 insert into lag(nafn,flytjandi,hofundur,tegund,diskur,lengd,texti,utgafudagur)
 values
@@ -254,47 +250,7 @@ I love you more than anyone in my life','2003-11-14'),
 ('Face to Face',2,2,16,4,3.58,'There''s not much I know about you
 Fear will always make you blind
 But the answer is in clear view
-It''s amazing what you''ll find face to face','2003-10-10'),
-
-('Give Life Back To Music',2,2,13,5,4.34,'Let the music in tonight
-Just turn on the music
-Let the music of your life
-Give life back to music','2014-01-31'),
-
-('The Game Of Love',2,2,13,5,5.21,'There is a game of love
-There is a game of love
-This is the game of love
-This is the game of love','2013-05-17'),
-
-('Contact',2,2,16,5,6.21,' It is a bright object and it''s obviously rotating because it''s flashing,
- it''s way out in the distance','2013-05-17'),
- 
-('Revolution 909',2,2,16,6,5.24,'Instrumental','1998-02-16'),
-
-('Da Funk',2,2,16,6,5.29,'Instrumental','1996-12-01'),
-
-('Around The World',2,2,15,6,7.09,'Around the world, around the world
-Around the world, around the world
-Around the world, around the world','1997-03-17'),
-
-('Burnin',2,2,16,6,6.53,'Instrumental','1997-09-15'),
-
-('Human After All',2,2,16,7,5.19,'We are human... after all
-Much in common. After all','2005-10-21'),
-
-('The Prime Time Of Your Life',2,2,16,7,4.23,'Now
-Live it
-The prime time of your life','2006-06-17'),
-
-('Robot Rock',2,2,18,7,4.47,'Rock. Robot Rock
-Rock. Robot Rock
-Rock. Robot Rock
-Rock. Robot Rock','2005-04-11'),
-
-('Technologic',2,2,16,7,4.44,'Buy it, use it, break it, fix it
-Trash it, change it, mail - upgrade it
-Charge it, point it, zoom it, press it','2005-06-14')
-;
+It''s amazing what you''ll find face to face','2003-10-10');
 insert into flytjandi(nafn,hljomsveit,flokkur,faedingarar,danarar,thjoderni)
 values
 ('Chris Martin','Coldplay',2,1977,NULL,'England'),
@@ -318,7 +274,6 @@ values
 ('Hljómsveit'),
 ('Dúó'),
 ('Electronic');
-
 insert into tegund(nafn)
 values
 ('pop'),
@@ -337,5 +292,142 @@ values
 ('Garage'),
 ('French House'),
 ('House'),
-('Synthpop'),
-('Electronic Rokk');
+('Synthpop');
+#A
+SELECT diskur.nafn as diskur, lag.nafn as lag
+FROM lag
+inner join diskur on lag.diskur=diskur.id
+WHERE diskur.nafn like 'purple rain';
+
+#B
+SELECT flytjandi.nafn as flytjandi, lag.nafn as lag
+FROM lag
+inner join flytjandi on lag.flytjandi=flytjandi.id
+WHERE flytjandi.nafn like 'Michael Jackson';
+
+#C
+SELECT tegund.nafn as tegund, lag.nafn as lag
+FROM lag
+inner join tegund on lag.tegund=tegund.id
+WHERE tegund.nafn like 'Pop';
+
+#D
+SELECT lag.nafn,lag.lengd
+FROM lag
+WHERE lag.lengd > 5;
+
+#E
+SELECT diskur.nafn,diskur.utgafudagur
+FROM diskur
+WHERE diskur.utgafudagur > '2010-01-01';
+
+#F
+SELECT lag.nafn as lag, flytjandi.nafn, lag.utgafudagur, lag.hofundur
+FROM lag
+inner join flytjandi on lag.flytjandi=flytjandi.id
+ORDER BY lag.hofundur DESC;
+
+#G
+SELECT lag.lengd, flytjandi.nafn, diskur.nafn
+FROM lag
+inner join flytjandi on lag.flytjandi=flytjandi.id
+inner join diskur on lag.diskur=diskur.id
+ORDER BY lag.lengd DESC
+LIMIT 5;
+
+#H
+select count(lag.nafn) as fjöldi_laga,tegund.nafn as tegund
+from lag
+inner join tegund on lag.tegund=tegund.ID
+group by lag.tegund
+order by count(lag.tegund) DESC
+limit 2;
+
+#I
+select count(diskur.nafn) as fjöldi_diska,utgefandi.nafn as utgefandi
+from diskur
+inner join utgefandi on diskur.utgefandi = utgefandi.ID
+group by utgefandi.nafn
+order by count(diskur.nafn)
+limit 4;
+
+#J
+select lag.nafn as lag,tegund.nafn as tegund,flytjandi.nafn as flytjandi
+from lag
+inner join flytjandi on lag.flytjandi = flytjandi.id
+inner join tegund on lag.tegund = tegund.id
+where lag.utgafudagur between '1982-01-01' and '2007-01-01'
+group by lag.nafn
+order by flytjandi.nafn;
+
+#K
+select lag.nafn
+from lag
+where nafn like 'A%' or nafn like'%s%';
+
+#L
+select nafn,2017-faedingarar as aldur_ef_lifandi,(danarar-faedingarar) as aldur_ef_dauðir
+from flytjandi;
+
+#M
+select avg(lengd)
+from lag;
+
+#N
+select count(lag.nafn),flytjandi.nafn
+from lag
+inner join flytjandi on lag.flytjandi= flytjandi.id
+group by flytjandi.nafn
+having count(lag.nafn)>4
+order by count(lag.nafn) desc;
+
+#O
+select flytjandi.nafn,danarar-faedingarar as aldur,lag.nafn as lag
+from lag
+inner join flytjandi on lag.flytjandi = flytjandi.id
+where danarar-faedingarar=58
+order by lag.nafn desc;
+
+#auka 1
+select lag.nafn,hofundur.nafn
+from lag
+inner join hofundur on lag.hofundur = hofundur.id
+where hofundur.nafn like 'Guy Rupert Berryman';
+
+#auka 2
+select count(lag.nafn),tegund.nafn as tegund
+from lag
+inner join tegund on lag.tegund=tegund.id
+group by tegund.nafn
+order by count(lag.nafn) desc
+limit 5;
+
+#auka 3
+select diskur.nafn,utgefandi.ar_stofnad
+from diskur
+inner join utgefandi on diskur.utgefandi = utgefandi.id
+where utgefandi.ar_stofnad<1954;
+
+#auka 4 
+select lag.nafn,flytjandi.thjoderni
+from lag
+inner join flytjandi on lag.flytjandi= flytjandi.id
+where flytjandi.thjoderni ='Ameríka';
+
+#auka 5
+SELECT utgefandi.nafn,diskur.nafn
+FROM utgefandi
+inner join diskur on diskur.utgefandi=utgefandi.id
+WHERE utgefandi.nafn like 'virgin';
+
+#auka 6
+SELECT flytjandi.nafn, flokkur.nafn
+FROM flytjandi
+inner join flokkur on flytjandi.flokkur=flokkur.id;
+
+#auka 7
+SELECT lag.nafn,hofundur.thjoderni
+FROM lag
+inner join hofundur on lag.hofundur=hofundur.id
+WHERE hofundur.thjoderni = 'England' OR hofundur.thjoderni = 'Skotland';
+
